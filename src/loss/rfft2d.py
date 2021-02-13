@@ -50,8 +50,9 @@ class Rfft2d(nn.Module):
         x = x.view(-1,self.blocksize,self.blocksize,k).permute(0,3,1,2)
         # now shape (N, #k, b, b)
         # perform DCT
+        # coeff = torch.fft.fft(x, signal_ndim=2)
         coeff = torch.rfft(x, signal_ndim=2)
-        
+
         return coeff / self.blocksize**2
     
     def inverse(self, coeff, output_shape):
